@@ -1,347 +1,251 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block style %}
-    <style>
-    
-        *, *:before, *:after {
-        box-sizing: border-box;
-        min-width: 0;
-        min-height: 0;
-        margin: 0;
-        padding: 0;
-        }
-
-        body {
-        margin: 0;
-        width: 100%;
-        font-family: "Source Sans Pro";
-        font-weight: 400;
-        font-style: normal;
-        -ms-text-size-adjust: 100%;
-        -webkit-text-size-adjust: 100%;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-rendering: optimizeLegibility;
-        }
-
-        .border-top {
-        width: 100%;
-        height: 0.75em;
-        top: 0;
-        width: 0;
-        -webkit-animation: ani-width ease-in-out 0.5s 0s both;
-                animation: ani-width ease-in-out 0.5s 0s both;
-        }
-        .border-top:after {
-        content: '';
-        bottom: 0;
-        width: 100%;
-        height: 0.75em;
-        right: 0;
-        -webkit-animation: ani-width ease-in-out 0.5s 1s both;
-                animation: ani-width ease-in-out 0.5s 1s both;
-        }
-
-        .border-left {
-        height: 100%;
-        width: 0.75em;
-        left: 0;
-        bottom: 0;
-        -webkit-animation: ani-height ease-in-out 0.5s 1.5s both;
-                animation: ani-height ease-in-out 0.5s 1.5s both;
-        }
-        .border-left:after {
-        content: '';
-        right: 0;
-        top: 0;
-        height: 100%;
-        width: 0.75em;
-        -webkit-animation: ani-height ease-in-out 0.5s 0.5s both;
-                animation: ani-height ease-in-out 0.5s 0.5s both;
-        }
-
-        .border-top,
-        .border-top:after,
-        .border-left,
-        .border-left:after {
-        position: fixed;
-        z-index: 9;
-        background-color: #fff;
-        }
-
-        h2 {
-        font-family: "Playfair Display";
-        font-weight: 700;
-        font-size: 1.75em;
-        line-height: 1.2;
-        }
-        @media (min-width: 32em) {
-        h2 {
-            font-size: 4em;
-        }
-        }
-
-        hr.sep {
-        border: 0px;
-        height: 1px;
-        background: #fff;
-        margin: 1.4em auto;
-        width: 3em;
-        }
-
-        main > section:nth-child(1):not(.site-menu), main > article:nth-child(1):not(.site-menu) {
-        z-index: 2;
-        }
-        main > section:nth-child(2):not(.site-menu), main > article:nth-child(2):not(.site-menu) {
-        z-index: 3;
-        }
-        main > section:nth-child(3):not(.site-menu), main > article:nth-child(3):not(.site-menu) {
-        z-index: 4;
-        }
-
-        .mast {
-        position: relative;
-        display: -webkit-box;
-        display: flex;
-        -webkit-box-align: center;
-                align-items: center;
-        height: 100vh;
-        width: 100%;
-        color: #fff;
-        margin-bottom: 1em;
-        }
-        .mast:after {
-        content: '';
-        z-index: 0;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.7);
-        }
-        .mast__bg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        margin: 0 auto;
-        padding: 0;
-        background-size: cover;
-        background-color: #111;
-        -webkit-animation: fade-in 1s ease both;
-                animation: fade-in 1s ease both;
-        }
-        .mast__header {
-        z-index: 5;
-        position: fixed;
-        width: 100%;
-        top: 45%;
-        text-align: center;
-        -webkit-animation: fade-in 2s 1.5s ease both;
-                animation: fade-in 2s 1.5s ease both;
-        }
-        .mast__pretitle {
-        margin-bottom: 0.5em;
-        font-size: 1em;
-        font-weight: 400;
-        text-transform: uppercase;
-        letter-spacing: 0.15em;
-        }
-
-        @-webkit-keyframes fade-in {
-        0% {
-            opacity: 0;
-        }
-        100% {
-            opacity: 1;
-        }
-        }
-
-        @keyframes fade-in {
-        0% {
-            opacity: 0;
-        }
-        100% {
-            opacity: 1;
-        }
-        }
-        @-webkit-keyframes ani-width {
-        0% {
-            width: 0;
-        }
-        100% {
-            width: 100%;
-        }
-        }
-        @keyframes ani-width {
-        0% {
-            width: 0;
-        }
-        100% {
-            width: 100%;
-        }
-        }
-        @-webkit-keyframes ani-height {
-        0% {
-            height: 0;
-        }
-        100% {
-            height: 100%;
-        }
-        }
-        @keyframes ani-height {
-        0% {
-            height: 0;
-        }
-        100% {
-            height: 100%;
-        }
-        }
-
-
-{% comment %} search bar {% endcomment %}
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
-
-.search {
-  width: 100%;
-  position: relative;
-  display: flex;
-}
-
-.searchTerm {
-  width: 100%;
-  border: 3px solid #00B4CC;
-  border-right: none;
-  padding: 5px;
-  height: 36px;
-  border-radius: 5px 0 0 5px;
-  outline: none;
-  color: #9DBFAF;
-}
-
-.searchTerm:focus{
-  color: #00B4CC;
-}
-
-.searchButton {
-  width: 40px;
-  height: 36px;
-  border: 1px solid #00B4CC;
-  background: #00B4CC;
-  text-align: center;
-  color: #fff;
-  border-radius: 0 5px 5px 0;
-  cursor: pointer;
-  font-size: 20px;
-}
-
-/*Resize the wrap to see the search bar change!*/
-.wrap{
-  width: 30%;
+<style>
+#soup-nav {
   position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 32px;
+  z-index: 9002;
+  font-size: 64px;
+}
+
+.soup-title {
+  font-size: 32px;
+}
+
+.soup-desc {
+  font-size: 16px;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background-color: #EEE;
+  color: #111;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+}
+
+#soup-container {
+  width: 100%;
+  height: 100%;
+  min-width: 320px;
+  min-height: 480px;
+  position: relative;
+}
+
+.letters-wrap {
+  position: absolute;
+  overflow: hidden;
+  display: inline-block;
+}
+.letters-wrap.mutable {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+.letters-wrap.mutable .letter {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: left 2s, top 2s, color 2s;
+  color: "#AAA";
+}
+.letters-wrap.mutable .letter.active {
+  color: "#111";
+  z-index: 9001;
+}
+.letters-wrap.position-data {
   top: 50%;
   left: 50%;
+  /*opacity: 0.1;*/
+  visibility: hidden;
   transform: translate(-50%, -50%);
 }
-    </style>
+
+.segment {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.letter {
+  /*display: inline-block;*/
+}
+
+button {
+  z-index: 9001;
+  position: relative;
+}
+
+</style>
 {% endblock  %}
 
 {% block content %}
-    <main>
-        <section class="mast">
-            <figure class="mast__bg" style="background-image:url(https://unsplash.it/1800/800?image=1033)"></figure>
-            <header class="mast__header  js-clippy">
-                <h5 class="mast__pretitle">Scroll Fool</h5><br>
+<div id="loader"></div>
+  <div id="soup-container">
+    <div id="segments">
+    </div>
+    <div id="soup-nav">
+      <span id="soup-prev"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i></span>
+      <span id="soup-next"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></span>
+      <a href="{% url 'main:choose' %}"><img src="{% static 'main/images/enter.png' %}" alt=""></a>
+    </div>
+</div>
 
-                <div class="wrap">
-                    <form class="search">
-                        <input type="text" class="searchTerm" placeholder="What are you looking for?">
-                        <button type="submit" class="searchButton">
-                        <i class="fa fa-search"></i>
-                        </button>
-                    </form>
-                </div>
-
-                <hr class="sep">
-            </header>
-        </section>
-
-        <section class="mast">
-            <figure class="mast__bg" style="background-image:url(https://unsplash.it/1800/800?image=1008)"></figure>
-            <header class="mast__header  js-clippy">
-                <h5 class="mast__pretitle">Go On Mon</h5>
-                <h2 class="mast__title">Clip Rect In Effect</h2>
-                <hr class="sep">
-            </header>
-        </section>
-        
-        <section class="mast">
-            <figure class="mast__bg" style="background-image:url(https://unsplash.it/1800/800?image=945)"></figure>
-            <header class="mast__header  js-clippy">
-                <h5 class="mast__pretitle">We Done Son</h5><br>
-
-                <div class="wrap">
-                    <form class="search">
-                        <input type="text" class="searchTerm" placeholder="What are you looking for?">
-                        <button type="submit" class="searchButton">
-                        <i class="fa fa-search"></i>
-                        </button>
-                    </form>
-                </div>
-
-                <hr class="sep">
-            </header>
-        </section>
-    </main>
-
-    <div class="border-top"></div>
-    <div class="border-left"></div>
-
-
+<script>
+$(document).ready(function() {
+  /*
+   * Main variables
+   */
+  var content = [{
+    title: "알 들",
+    desc: "알고 들어가자!"
+  }, {
+    title: "Lorem ipsum",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+  }, {
+    title: "dolor sit amet",
+    desc: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  }, {
+    title: "Grouping example",
+    desc: [
+      ["<u>Grouped text</u>"], " separate text".split("")
+    ]
+  }];
+  var currentPage = 0;
+  //generate content
+  for (var i = 0; i < content.length; i++) {
+    //split content letters to array
+    for (var obj in content[i]) {
+      //if string
+      if (typeof content[i][obj] === "string") {
+        content[i][obj] = content[i][obj].split("");
+        continue;
+      }
+      //if array (grouped text)
+      else if (typeof content[i][obj] === "object") {
+        var toPush = [];
+        for(var j = 0; j < content[i][obj].length; j++) {
+          for(var k = 0; k < content[i][obj][j].length; k++) {
+            toPush.push(content[i][obj][j][k]);
+          }
+        }
+        content[i][obj] = toPush;
+      }
+    }
+    //set text to 
+    $("#segments").append("<div class=\"letters-wrap mutable\"><div class=\"soup-title\"></div><div class=\"soup-desc\"></div></div>");
+   
+    setText();
     
-    
-    
-    
-    <script>
-        /*---------------------------------------------
-        Clippy Headings
-        - Creates a scrolling cliprect effect on fixed headings
-        ----------------------------------------------*/
+    //clone to data
+    $("#segments").append("<div class=\"letters-wrap position-data\"><div class=\"soup-title\"></div><div class=\"soup-desc\"></div></div>");
+    setText();
+  }
+  //initial arrangement
+  arrangeCurrentPage();
+  scrambleOthers();
+  /*
+   * Event handlers
+   */
+  $(window).resize(function() {
+    arrangeCurrentPage();
+    scrambleOthers();
+  });
+  $("#soup-prev").hide();
+  $("#soup-prev").click(function() {
+    $("#soup-next").show();
+    currentPage--;
+    if (currentPage === 0) {
+      $("#soup-prev").hide();
+    }
+    arrangeCurrentPage();
+    scrambleOthers();
+  });
+  $("#soup-next").click(function() {
+    $("#soup-prev").show();
+    currentPage++;
+    if (currentPage === content.length - 1) {
+      $("#soup-next").hide();
+    }
+    arrangeCurrentPage();
+    scrambleOthers();
+  });
+  /*
+   * Functions
+   */
+  function arrangeCurrentPage() {
+    for (var i = 0; i < content[currentPage].title.length; i++) {
+      $(".mutable:eq(" + currentPage + ") > .soup-title > .letter").eq(i).css({
+        left: $(".position-data:eq(" + currentPage + ") > .soup-title > .letter").eq(i).offset().left + "px",
+        top: $(".position-data:eq(" + currentPage + ") > .soup-title > .letter").eq(i).offset().top + "px",
+        color: "#111",
+        zIndex: 9001
+      });
+    }
+    for (var i = 0; i < content[currentPage].desc.length; i++) {
+      $(".mutable:eq(" + currentPage + ") > .soup-desc > .letter").eq(i).css({
+        left: $(".position-data:eq(" + currentPage + ") > .soup-desc > .letter").eq(i).offset().left + "px",
+        top: $(".position-data:eq(" + currentPage + ") > .soup-desc > .letter").eq(i).offset().top + "px",
+        color: "#111",
+        zIndex: 9001
+      });
+    }
+  }
 
-        (function ($) {
-        var s,
-            clippy = {
-            settings: {
-                heading: $(".js-clippy")
-            },
-            init: function () {
-                s = this.settings;
-                this.bindEvents();
-            },
-            bindEvents: function () {
-                $(window).on("load resize scroll", $.proxy(this.getClippy, this));
-            },
+  function setText() {
+    var j;
+    for (j = 0; j < content[i].title.length; j++) {
+      $(".soup-title").last().append("<span class=\"letter\">" + content[i].title[j] + "</span>");
+    }
+    for (j = 0; j < content[i].desc.length; j++) {
+      $(".soup-desc").last().append("<span class=\"letter\">" + content[i].desc[j] + "</span>");
+    }
+  }
 
-            getClippy: function () {
-                s.heading.each(function () {
-                var layerOffset = $(this).closest("article, section").offset(),
-                    containerOffset = layerOffset.top - $(window).scrollTop(),
-                    clippy =
-                    containerOffset -
-                    $(this)
-                        .css("top")
-                        .replace(/[^-\d\.]/g, "") -
-                    $(this)
-                        .css("margin-top")
-                        .replace(/[^-\d\.]/g, "");
-                $(this).css("clip", "rect(" + clippy + "px, auto, auto, auto)");
-                });
-            }
-            };
-        clippy.init();
-        })(jQuery);
-
+  function scrambleOthers() {
+    for (var i = 0; i < content.length; i++) {
+      //don't scramble currentPage
+      if (currentPage === i)
+        continue;
+      var parts = [
+        ["title", ".soup-title"],
+        ["desc", ".soup-desc"]
+      ];
+      //apply to .title h1s and .desc ps
+      for (var j = 0; j < parts.length; j++) {
+        for (var k = 0; k < content[i][parts[j][0]].length; k++) {
+          //define random position on screen
+          var randLeft = Math.floor(Math.random() * $(window).width());
+          var randTop = Math.floor(Math.random() * $(window).height());
+          //defining boundaries
+          var offset = $(".position-data").eq(currentPage).offset();
+          var bounds = {
+            left: offset.left,
+            top: offset.top,
+            right: $(window).width() - offset.left,
+            bottom: $(window).height() - offset.top
+          };
+          var middleX = bounds.left + $(".position-data").eq(currentPage).width() / 2;
+          var middleY = bounds.top + $(".position-data").eq(currentPage).height() / 2;
+          //finally, apply all the scrambles
+          $(".mutable:eq(" + i + ") > " + parts[j][1] + " > .letter").eq(k).css({
+            left: randLeft,
+            top: randTop,
+            color: "#DDD",
+            zIndex: "initial"
+          });
+        }
+      }
+    }
+  }
+});
 </script>
 {% endblock  %}

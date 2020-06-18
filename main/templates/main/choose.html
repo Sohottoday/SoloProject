@@ -1,0 +1,347 @@
+{% extends 'base.html' %}
+
+{% block style %}
+    <style>
+    
+        *, *:before, *:after {
+        box-sizing: border-box;
+        min-width: 0;
+        min-height: 0;
+        margin: 0;
+        padding: 0;
+        }
+
+        body {
+        margin: 0;
+        width: 100%;
+        font-family: "Source Sans Pro";
+        font-weight: 400;
+        font-style: normal;
+        -ms-text-size-adjust: 100%;
+        -webkit-text-size-adjust: 100%;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+        }
+
+        .border-top {
+        width: 100%;
+        height: 0.75em;
+        top: 0;
+        width: 0;
+        -webkit-animation: ani-width ease-in-out 0.5s 0s both;
+                animation: ani-width ease-in-out 0.5s 0s both;
+        }
+        .border-top:after {
+        content: '';
+        bottom: 0;
+        width: 100%;
+        height: 0.75em;
+        right: 0;
+        -webkit-animation: ani-width ease-in-out 0.5s 1s both;
+                animation: ani-width ease-in-out 0.5s 1s both;
+        }
+
+        .border-left {
+        height: 100%;
+        width: 0.75em;
+        left: 0;
+        bottom: 0;
+        -webkit-animation: ani-height ease-in-out 0.5s 1.5s both;
+                animation: ani-height ease-in-out 0.5s 1.5s both;
+        }
+        .border-left:after {
+        content: '';
+        right: 0;
+        top: 0;
+        height: 100%;
+        width: 0.75em;
+        -webkit-animation: ani-height ease-in-out 0.5s 0.5s both;
+                animation: ani-height ease-in-out 0.5s 0.5s both;
+        }
+
+        .border-top,
+        .border-top:after,
+        .border-left,
+        .border-left:after {
+        position: fixed;
+        z-index: 9;
+        background-color: #fff;
+        }
+
+        h2 {
+        font-family: "Playfair Display";
+        font-weight: 700;
+        font-size: 1.75em;
+        line-height: 1.2;
+        }
+        @media (min-width: 32em) {
+        h2 {
+            font-size: 4em;
+        }
+        }
+
+        hr.sep {
+        border: 0px;
+        height: 1px;
+        background: #fff;
+        margin: 1.4em auto;
+        width: 3em;
+        }
+
+        main > section:nth-child(1):not(.site-menu), main > article:nth-child(1):not(.site-menu) {
+        z-index: 2;
+        }
+        main > section:nth-child(2):not(.site-menu), main > article:nth-child(2):not(.site-menu) {
+        z-index: 3;
+        }
+        main > section:nth-child(3):not(.site-menu), main > article:nth-child(3):not(.site-menu) {
+        z-index: 4;
+        }
+
+        .mast {
+        position: relative;
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-align: center;
+                align-items: center;
+        height: 100vh;
+        width: 100%;
+        color: #fff;
+        margin-bottom: 1em;
+        }
+        .mast:after {
+        content: '';
+        z-index: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        }
+        .mast__bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0;
+        background-size: cover;
+        background-color: #111;
+        -webkit-animation: fade-in 1s ease both;
+                animation: fade-in 1s ease both;
+        }
+        .mast__header {
+        z-index: 5;
+        position: fixed;
+        width: 100%;
+        top: 45%;
+        text-align: center;
+        -webkit-animation: fade-in 2s 1.5s ease both;
+                animation: fade-in 2s 1.5s ease both;
+        }
+        .mast__pretitle {
+        margin-bottom: 0.5em;
+        font-size: 1em;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        }
+
+        @-webkit-keyframes fade-in {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+        }
+
+        @keyframes fade-in {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+        }
+        @-webkit-keyframes ani-width {
+        0% {
+            width: 0;
+        }
+        100% {
+            width: 100%;
+        }
+        }
+        @keyframes ani-width {
+        0% {
+            width: 0;
+        }
+        100% {
+            width: 100%;
+        }
+        }
+        @-webkit-keyframes ani-height {
+        0% {
+            height: 0;
+        }
+        100% {
+            height: 100%;
+        }
+        }
+        @keyframes ani-height {
+        0% {
+            height: 0;
+        }
+        100% {
+            height: 100%;
+        }
+        }
+
+
+{% comment %} search bar {% endcomment %}
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+.search {
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+
+.searchTerm {
+  width: 100%;
+  border: 3px solid #00B4CC;
+  border-right: none;
+  padding: 5px;
+  height: 36px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #9DBFAF;
+}
+
+.searchTerm:focus{
+  color: #00B4CC;
+}
+
+.searchButton {
+  width: 40px;
+  height: 36px;
+  border: 1px solid #00B4CC;
+  background: #00B4CC;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.wrap{
+  width: 30%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+    </style>
+{% endblock  %}
+
+{% block content %}
+    <main>
+        <section class="mast">
+            <figure class="mast__bg" style="background-image:url(https://unsplash.it/1800/800?image=1033)"></figure>
+            <header class="mast__header  js-clippy">
+                <h5 class="mast__pretitle">매장 검색</h5><br>
+
+                <div class="wrap">
+                    <form class="search">
+                        <input type="text" class="searchTerm" placeholder="What are you looking for?">
+                        <button type="submit" class="searchButton">
+                        <i class="fa fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <hr class="sep">
+            </header>
+        </section>
+
+        <section class="mast">
+            <figure class="mast__bg" style="background-image:url(https://unsplash.it/1800/800?image=1008)"></figure>
+            <header class="mast__header  js-clippy">
+                <h5 class="mast__pretitle">동향 보기</h5>
+                <h2 class="mast__title"><a href=#"" style="text-decoration:none;color:white">분석 페이지 바로가기</a></h2>
+                <hr class="sep">
+            </header>
+        </section>
+        
+        <section class="mast">
+            <figure class="mast__bg" style="background-image:url(https://unsplash.it/1800/800?image=945)"></figure>
+            <header class="mast__header  js-clippy">
+                <h5 class="mast__pretitle">우리동네 찾아보기</h5><br>
+
+                <div class="wrap">
+                    <form class="search">
+                        <input type="text" class="searchTerm" placeholder="What are you looking for?">
+                        <button type="submit" class="searchButton">
+                        <i class="fa fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <hr class="sep">
+            </header>
+        </section>
+    </main>
+
+    <div class="border-top"></div>
+    <div class="border-left"></div>
+
+
+    
+    
+    
+    
+    <script>
+        /*---------------------------------------------
+        Clippy Headings
+        - Creates a scrolling cliprect effect on fixed headings
+        ----------------------------------------------*/
+
+        (function ($) {
+        var s,
+            clippy = {
+            settings: {
+                heading: $(".js-clippy")
+            },
+            init: function () {
+                s = this.settings;
+                this.bindEvents();
+            },
+            bindEvents: function () {
+                $(window).on("load resize scroll", $.proxy(this.getClippy, this));
+            },
+
+            getClippy: function () {
+                s.heading.each(function () {
+                var layerOffset = $(this).closest("article, section").offset(),
+                    containerOffset = layerOffset.top - $(window).scrollTop(),
+                    clippy =
+                    containerOffset -
+                    $(this)
+                        .css("top")
+                        .replace(/[^-\d\.]/g, "") -
+                    $(this)
+                        .css("margin-top")
+                        .replace(/[^-\d\.]/g, "");
+                $(this).css("clip", "rect(" + clippy + "px, auto, auto, auto)");
+                });
+            }
+            };
+        clippy.init();
+        })(jQuery);
+
+</script>
+{% endblock  %}
